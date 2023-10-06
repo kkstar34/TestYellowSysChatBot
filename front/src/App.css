@@ -420,11 +420,20 @@ label i{
     width: 15%;
     right: 2rem;
   }
+
+  .container{
+    height: calc(100vh - 50px); 
+    overflow: hidden;
+  }
 }
 
 
 
 @media screen and (max-width: 760px){
+  .container{
+    height: calc(100vh - 50px); 
+    overflow: hidden;
+  }
   .chat-box{
     padding: 1rem 1rem 2.5rem 1rem;
   }
