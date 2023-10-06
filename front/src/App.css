@@ -11,12 +11,12 @@
 
 .app{
   background-color: var(--chat-box-bg-color);
-  height: 100vh;
 }
 
 .container{
   display: flex;
   height: 100vh;
+  overflow: hidden;
 }
 
 .aside{
