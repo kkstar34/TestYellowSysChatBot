@@ -422,7 +422,7 @@ label i{
   }
 
   .container{
-    height: calc(100vh - 50px); 
+    height: calc(100vh - 100px); 
     overflow: hidden;
   }
 }
@@ -431,7 +431,7 @@ label i{
 
 @media screen and (max-width: 760px){
   .container{
-    height: calc(100vh - 50px); 
+    height: calc(100vh - 100px); 
     overflow: hidden;
   }
   .chat-box{
