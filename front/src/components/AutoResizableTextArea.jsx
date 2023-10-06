@@ -47,7 +47,7 @@ function AutoResizableTextarea() {
       <div className="input-file-container">
           <input type="file" id="customFileInput" />
           <label htmlFor="customFileInput">
-              <i className="fas fa-upload"></i>
+              <i className="fas fa-upload icon-sidebar-footer"></i>
           </label>
         </div>
         <div className={active ? 'icon-send active' : 'icon-send'}>

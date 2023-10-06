@@ -60,11 +60,11 @@
   border-radius: 0.5rem;
   display: flex;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  padding: 1.4rem;
+  padding: 1rem;
   color: white;
   width: 75%;
   cursor: pointer;
-  font-size: 1.5rem;
+  font-size: 1rem;
 }
 
 .new-chat-small {
@@ -80,7 +80,7 @@
 
 .new-chat-text{
   margin-left: 1rem;
-  font-size: 1.5rem;
+  font-size: 1rem;
 }
 
 .new-chat-small-text{
@@ -97,11 +97,11 @@
   border-radius: 0.5rem;
   display: flex;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  padding: 1.4rem;
+  padding: 1rem;
   align-items: center;
   justify-content:center;
   cursor: pointer;
-  font-size: 1.5rem;
+  font-size: 1rem;
   opacity: 1;
 }
 
@@ -120,9 +120,9 @@
 
 .open-sidebar-icon{
   position: absolute;
-  padding: 1.4rem;
+  padding: 1rem;
   left: 1.4rem;
-  font-size: 1.5rem;
+  font-size: 1rem;
   border-radius: 0.5rem;
   border: 1px solid rgba(255, 255, 255, 0.2);
   display: flex;
@@ -162,9 +162,7 @@
 }
 
 
-.separator{
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-}
+
 
 
 
@@ -177,7 +175,7 @@
 
 
 .items{
-  padding:0  1.5rem;
+  padding:0  1rem;
   width: 100%;
 }
 
@@ -188,12 +186,12 @@
 
 .icon-sidebar-footer{
   color: white;
-  font-size: 1.5rem;
+  font-size: 1rem;
 }
 
 .icon-sidebar-small-footer{
   color: white;
-  font-size: 1.5rem;
+  font-size: 1rem;
 }
 
 .item{
@@ -211,7 +209,7 @@
 .name{
   color: white;
   margin-left: 1rem;
-  font-size: 1.5rem;
+  font-size: 1rem;
 }
 
 .name-small{
@@ -229,9 +227,9 @@
 .input-text{
   background-color: var(--input-color );
   border-radius: 0.8rem;
-  padding: 1.5rem;
+  padding: 1rem;
   border: none;
-  font-size:24px;
+  font-size:1rem;
   resize: none; 
   overflow: hidden;
   width: 92%;
@@ -241,7 +239,7 @@
   width: 8%;
   position: absolute;
   right: 1.5rem;
-  bottom: 1rem;
+  bottom: 0.3rem;
   display: flex;
   align-items: center;
 }
@@ -260,7 +258,7 @@
 
 textarea
 {
-    font-size:24px;
+    font-size:1rem;
     color: white;
     resize: none; 
     overflow: hidden;
