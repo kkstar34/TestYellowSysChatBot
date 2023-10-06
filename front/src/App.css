@@ -1,0 +1,15 @@
+
+.app{
+  display: flex;
+  height: 100vh;
+}
+
+.aside{
+  width: 20%;
+  background-color: #202123;
+}
+
+.chat-box{
+  width: 80%;
+  background-color: #343541;
+}
