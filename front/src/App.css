@@ -425,11 +425,18 @@ label i{
     height: calc(100vh - 100px); 
     overflow: hidden;
   }
+
+  .aside{
+    height: calc(100vh - 100px); 
+  }
 }
 
 
 
 @media screen and (max-width: 760px){
+  .aside{
+    height: calc(100vh - 100px); 
+  }
   .container{
     height: calc(100vh - 100px); 
     overflow: hidden;

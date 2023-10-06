@@ -21,8 +21,8 @@ body{
     background-color: #202123;
     padding: 1rem;
     transition:  ease-in-out 0.3s;
-    height: 100vh;
-    box-shadow: 250px 0px 10px rgba(255, 255, 255, 0.2);
+    height: calc(100vh - 100px); 
+    box-shadow: 200px 0px 10px rgba(255, 255, 255, 0.2);
   }
 
 
