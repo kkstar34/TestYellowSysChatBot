@@ -3,11 +3,10 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UploadController } from './upload/upload.controller';
 
+// UploadController
 @Module({
   imports: [],
-  controllers: [AppController, UploadController],
+  controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}
-
-
