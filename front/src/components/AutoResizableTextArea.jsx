@@ -1,19 +1,36 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { postFileThunk } from "../redux/slices/files";
+import { getEncoding } from 'js-tiktoken';
 import "./Input.css";
+
+const tiktoken = getEncoding('cl100k_base');
 
 function AutoResizableTextarea() {
   const [active, setActive] = useState(false);
   const [value, setValue] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
+  const [nbTokens, setNbTokens] = useState(0);
   const loading = useSelector((state) => state.files.loading);
   const dispatch = useDispatch();
+
+  
+
+
+  function mapTextToSubstringsAndTokens(text) {
+    const tokens = tiktoken.encode(text);
+    return tokens.map((token) => [tiktoken.decode([token]), token]);
+  }
+
 
   const handleChange = (e) => {
     const newValue = e.target.value;
     setValue(newValue);
+    const tokens = mapTextToSubstringsAndTokens(e.target.value);
+    setNbTokens(tokens.length);
   };
+
+
 
   const handleFileChange = (e) => {
     setSelectedFile(e.target.files[0]);
@@ -50,6 +67,9 @@ function AutoResizableTextarea() {
     dispatch(postFileThunk(formData, value));
     setValue("");
     setSelectedFile(null);
+    const input = document.querySelector('.input-text');
+    input.style.height = "auto";
+    setNbTokens(0);
 
     }else{
         alert('Ce test ne prend en compte que les fichier xslx ou csv');
@@ -70,6 +90,13 @@ function AutoResizableTextarea() {
       />
 
       <div className="button-group">
+
+      <div className="input-file-container">
+          <span className="tokens">
+           {`Tokens : ${nbTokens}`}
+          </span>
+        </div>
+
         <div className="input-file-container">
           <input
             type="file"
@@ -93,6 +120,7 @@ function AutoResizableTextarea() {
           <div
             className={active ? "icon-send active" : "icon-send"}
             onClick={handleUpload}
+           
           >
             <i className="fa-regular fa-paper-plane icon-sidebar-footer"></i>
           </div>

@@ -253,18 +253,22 @@
   font-size:1rem;
   resize: none; 
   overflow: hidden;
-  width: 92%;
+  width: 75%;
 }
 
 .button-group{
-  width: 8%;
+  width: 25%;
   position: absolute;
   right: 1.5rem;
   bottom: 0.3rem;
   display: flex;
   align-items: center;
+  justify-content: end;
 }
 
+.tokens{
+  color: white;
+}
 
 
 
@@ -358,6 +362,7 @@ label i{
 .response-row{
   margin-top: 1rem;
   display : flex;
+ 
   /* align-items: center; */
   /* position: relative; */
 }
@@ -369,14 +374,16 @@ label i{
   width: 5%;
 }
 
-.reponse-text{
+.response-text{
   margin-left: 0rem;
   margin-top: 0.3rem;
   /* position: absolute; */
   top: 0;
   color: white;
   width: 95%;
+  word-wrap: break-word; 
   margin-left: 0.8rem;
+  
 }
 
 .chat-row{
@@ -467,7 +474,7 @@ label i{
   }
 
   .button-group{
-    width: 15%;
+    width: 20%;
     right: 2rem;
   }
 
@@ -484,6 +491,12 @@ label i{
 
 
 @media screen and (max-width: 760px){
+  .tokens{
+    width: 60px;
+    font-size: 0.5rem;
+
+  }
+ 
   .aside{
     height: calc(100vh - 100px); 
   }
@@ -501,7 +514,7 @@ label i{
     font-size:16px;
     resize: none; 
     overflow: hidden;
-    width: 85%;
+    width: 70%;
   }
 
   .icon-send{
@@ -513,7 +526,7 @@ label i{
 
   .button-group{
     bottom: 0.5rem;
-    width: 15%;
+    width: 30%;
     right: 1.5rem;
   }
 
@@ -540,7 +553,7 @@ label i{
     border-radius: 0.5rem;
   }
   
-  .reponse-text{
+  .response-text{
     margin-left: 1.5rem;
   }
 }

@@ -74,8 +74,8 @@ function ChatBox() {
                   <div className="avatar">
                     <img src="assets/images/user-avatar.png" alt="" />
                   </div>
-                  <div className="reponse-text">
-                    <p>{elt.data } </p>
+                  <div className="response-text">
+                    <span>{elt.data } </span>
                   </div>
                 </div>
               ) : (
@@ -84,7 +84,7 @@ function ChatBox() {
                     <img src="assets/images/chat-avatar.png" alt="" />
                   </div>
 
-                  <div className="reponse-text">
+                  <div className="response-text">
                     <p>
                       <TypingEffect
                         text="La génération du fichier Excel a été effectuée avec succès. 
