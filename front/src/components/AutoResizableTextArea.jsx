@@ -42,7 +42,7 @@ function AutoResizableTextarea() {
 
     const fileExtension = selectedFile.name.split('.').pop().toLowerCase();
   
-    if (!fileExtension !== 'xlsx' || !fileExtension !== 'csv') {
+    if (!fileExtension !== 'xlsx' && !fileExtension !== 'csv') {
       alert('Ce test ne prend en compte que les fichier xslx ou csv')
       return;
     }
