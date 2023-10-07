@@ -92,8 +92,8 @@ function ChatBox() {
                         speed={15}
                         downloadExcel = {downloadExcel}
                         filename = {elt.data}
+                        delay = {elt.elapsedTime}
                       />
-                    <span> {elt.elapsedTime}</span>
                     </p>
 
                   
