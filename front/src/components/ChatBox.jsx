@@ -93,7 +93,7 @@ function ChatBox() {
                         downloadExcel = {downloadExcel}
                         filename = {elt.data}
                       />
-                    
+                    <span> {elt.elapsedTime}</span>
                     </p>
 
                   

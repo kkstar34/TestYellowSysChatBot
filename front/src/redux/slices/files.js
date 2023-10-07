@@ -9,7 +9,7 @@ var baseUrl = "https://back-with-nest.vercel.app";
 
 const initialState = 
     {
-        baseUrl : baseUrl,
+       baseUrl : baseUrl,
        link : '',
        loading : false,
        text : [],
@@ -51,6 +51,7 @@ export const postFileThunk = (data, text) => {
             data : text
         }
         dispatch(postFile(dataSend));
+        const startTime = performance.now();
         try {
             const response = await axios.post(`${baseUrl}/upload`, data, {
                 headers: {
@@ -58,17 +59,24 @@ export const postFileThunk = (data, text) => {
                 },
               });
             // console.log("succès : requete envoyée avec succès")
+            const endTime = performance.now();
+            const elapsedTime = endTime - startTime;
             const dataResponse = {
                 mine : false,
-                data : response.data
+                data : response.data,
+                elapsedTime : elapsedTime
             }
             dispatch(postFileSuccess(dataResponse));
+
         }
 
         catch (err) {
+            const endTime = performance.now();
+            const elapsedTime = endTime - startTime;
             const dataResponse = {
                 mine : false,
-                data : err.message
+                data : err.message,
+                elapsedTime : elapsedTime
             }
             dispatch(postFileFailure(dataResponse));
         }
