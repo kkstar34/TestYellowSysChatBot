@@ -47,7 +47,7 @@ export class FileController {
 
   @Get('download/:fileName')
   async downloadFile(@Param('fileName') fileName: string, @Res() res: Response) {
-    // const filePath = path.join('/tmp/', fileName);
+    const filePath = path.join('/tmp/', fileName);
     //  const filePath = path.join(__dirname, '../uploads/', fileName);
     console.log(fileName);
 
