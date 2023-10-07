@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const TypingEffect = ({ text, speed }) => {
+const TypingEffect = ({ text, speed,downloadExcel , filename }) => {
   const [displayText, setDisplayText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -19,7 +19,10 @@ const TypingEffect = ({ text, speed }) => {
     };
   }, [text, currentIndex, speed]);
 
-  return <span>{displayText}</span>;
+  return <span style={{ lineHeight: "1.8" }}>{displayText} <a href="#dowload" onClick={(e)=>{
+    e.preventDefault();
+    return downloadExcel(filename);
+  }}><span>Télécharger <i className="fa-solid fa-download"></i></span></a></span>;
 };
 
 export default TypingEffect;

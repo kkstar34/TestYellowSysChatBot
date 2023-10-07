@@ -13,6 +13,27 @@
   background-color: var(--chat-box-bg-color);
 }
 
+::-webkit-scrollbar {
+  width: .2rem;
+  
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: var(--sidebar-bg-color);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--history-color);
+  border-radius: 1rem;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(19, 32, 220, 0.8);
+}
+
 .container{
   display: flex;
   height: 100vh;
@@ -317,6 +338,7 @@ label i{
 .chat-content{
   height:70%;
   overflow-y: scroll;
+  padding: 0 1rem;
 }
 
 .chat-footer{
@@ -349,7 +371,7 @@ label i{
 
 .reponse-text{
   margin-left: 0rem;
-  margin-top: 0.5rem;
+  margin-top: 0.3rem;
   /* position: absolute; */
   top: 0;
   color: white;

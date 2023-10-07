@@ -30,10 +30,23 @@ function AutoResizableTextarea() {
   };
 
   const handleUpload = async () => {
-    if (!selectedFile) {
+    if (!selectedFile ) {
       alert("Veuillez sélectionner un fichier Excel.");
       return;
     }
+
+    if (!value ) {
+      alert("Veuillez ecrire votre demande");
+      return;
+    }
+
+    const fileExtension = selectedFile.name.split('.').pop().toLowerCase();
+  
+    if (!fileExtension !== 'xlsx' || !fileExtension !== 'csv') {
+      alert('Ce test ne prend en compte que les fichier xslx ou csv')
+      return;
+    }
+
 
     const formData = new FormData();
     formData.append("excelFile", selectedFile);

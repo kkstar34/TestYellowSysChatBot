@@ -66,20 +66,20 @@ function ChatBox() {
       </div>
 
       <div className="chat-content">
-        {dataText && dataText.map((elt,id) => {
+        {dataText && dataText.map((elt, i) => {
           return (
-            <>
+            <div key={i}>
               { elt.mine ? (
-                <div className="response-row" key={id}>
+                <div className="response-row" >
                   <div className="avatar">
                     <img src="assets/images/user-avatar.png" alt="" />
                   </div>
                   <div className="reponse-text">
-                    <p>{elt.data}</p>
+                    <p>{elt.data } </p>
                   </div>
                 </div>
               ) : (
-                <div className="response-row" key={id}>
+                <div className="response-row" >
                   <div className="avatar">
                     <img src="assets/images/chat-avatar.png" alt="" />
                   </div>
@@ -87,26 +87,20 @@ function ChatBox() {
                   <div className="reponse-text">
                     <p>
                       <TypingEffect
-                        text={elt.data}
+                        text="La génération du fichier Excel a été effectuée avec succès. 
+                        Vous pouvez télécharger le fichier à partir du lien suivant :"
                         speed={15}
+                        downloadExcel = {downloadExcel}
+                        filename = {elt.data}
                       />
-
-                      <span className="download-btn" onClick={(e)=>{
-                        e.preventDefault();
-                        return downloadExcel(elt.data);
-                      }}>
-                        <a href="#dowload" onClick={(e)=>{
-                        e.preventDefault();
-                        return downloadExcel(elt.data);
-                      }}><span>Télécharger <i className="fa-solid fa-download"></i></span></a>
-                      </span>
+                    
                     </p>
 
                   
                   </div>
                 </div>
               )}
-            </>
+            </div>
           );
         })}
       </div>
