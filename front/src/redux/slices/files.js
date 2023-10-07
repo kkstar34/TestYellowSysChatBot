@@ -50,7 +50,7 @@ export const postFileThunk = (data, text) => {
         }
         dispatch(postFile(dataSend));
         try {
-            const response = await axios.post(`${basUrl}/files/upload`, data, {
+            const response = await axios.post(`${basUrl}/upload`, data, {
                 headers: {
                   'Content-Type': 'multipart/form-data',
                 },
