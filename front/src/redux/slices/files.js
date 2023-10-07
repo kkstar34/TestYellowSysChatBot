@@ -2,12 +2,14 @@ import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 
-// var basUrl = "http://127.0.0.1:4000" ;
 
-var basUrl = "https://back-with-nest.vercel.app";
+
+var baseUrl = "https://back-with-nest.vercel.app";
+// var baseUrl ="http://127.0.0.1:4000";
 
 const initialState = 
     {
+        baseUrl : baseUrl,
        link : '',
        loading : false,
        text : [],
@@ -50,7 +52,7 @@ export const postFileThunk = (data, text) => {
         }
         dispatch(postFile(dataSend));
         try {
-            const response = await axios.post(`${basUrl}/upload`, data, {
+            const response = await axios.post(`${baseUrl}/upload`, data, {
                 headers: {
                   'Content-Type': 'multipart/form-data',
                 },

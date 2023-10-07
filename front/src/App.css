@@ -316,6 +316,7 @@ label i{
 
 .chat-content{
   height:70%;
+  overflow-y: scroll;
 }
 
 .chat-footer{
@@ -329,6 +330,35 @@ label i{
   font-size: 2rem;
   cursor: pointer;
   display: none;
+}
+
+
+.response-row{
+  margin-top: 1rem;
+  display : flex;
+  /* align-items: center; */
+  /* position: relative; */
+}
+
+.avatar{
+  /* position: absolute;
+  left: 0;
+  top : 0; */
+  width: 5%;
+}
+
+.reponse-text{
+  margin-left: 0rem;
+  margin-top: 0.5rem;
+  /* position: absolute; */
+  top: 0;
+  color: white;
+  width: 95%;
+  margin-left: 0.8rem;
+}
+
+.chat-row{
+  margin-bottom: 5rem;
 }
 
 @media screen and ((min-width: 768px) and (max-width: 1024px)){
@@ -488,4 +518,7 @@ label i{
     border-radius: 0.5rem;
   }
   
+  .reponse-text{
+    margin-left: 1.5rem;
+  }
 }

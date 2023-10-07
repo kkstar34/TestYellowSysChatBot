@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { postFileThunk } from "../redux/slices/files";
-import './Input.css';
+import "./Input.css";
 
 function AutoResizableTextarea() {
   const [active, setActive] = useState(false);
@@ -57,7 +57,14 @@ function AutoResizableTextarea() {
 
       <div className="button-group">
         <div className="input-file-container">
-          <input type="file" id="customFileInput" onChange={handleFileChange} />
+          <input
+            type="file"
+            id="customFileInput"
+            onChange={handleFileChange}
+            onClick={(event) => {
+              event.target.value = null;
+            }}
+          />
           <label htmlFor="customFileInput">
             <i className="fas fa-upload icon-sidebar-footer"></i>
           </label>
