@@ -6,6 +6,7 @@ import { createPortal } from 'react-dom';
 
 function SidebarSmallScreen() {
 
+  //i must do with click away
   const dispatch = useDispatch();
   const {hideSmallSidebar} = SidebarSlice.actions;
   const hide = useSelector(state => state.sidebar.smallClose);

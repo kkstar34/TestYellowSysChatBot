@@ -1,9 +1,10 @@
 import { combineReducers } from "redux";
 import sidebarReducer from "./sidebar";
-
+import fileReducer from "./files";
 
 const rootReducer = combineReducers({
-   sidebar : sidebarReducer
+   sidebar : sidebarReducer,
+   files : fileReducer
 })
 
 

@@ -1,60 +1,81 @@
-import React, { useState } from 'react';
-
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { postFileThunk } from "../redux/slices/files";
+import './Input.css';
 
 function AutoResizableTextarea() {
- 
-  const [active,setActive] = useState(false);
-  const [valeur, setValeur] = useState('');
-
-  // const handleChange = (event) => {
-  //   event.target.style.height = 'auto'; 
-  //   setTextareaHeight(`${event.target.scrollHeight}px`);
-  //   setActive(true);
-  // };
+  const [active, setActive] = useState(false);
+  const [value, setValue] = useState("");
+  const [selectedFile, setSelectedFile] = useState(null);
+  const loading = useSelector((state) => state.files.loading);
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
-    const nouvelleValeur = e.target.value;
-    setValeur(nouvelleValeur);
+    const newValue = e.target.value;
+    setValue(newValue);
+  };
+
+  const handleFileChange = (e) => {
+    setSelectedFile(e.target.files[0]);
   };
 
   const ajusterHauteurTextarea = (element) => {
-    element.style.height = 'auto'; // Réinitialiser la hauteur à "auto" pour mesurer correctement le scrollHeight
-    if(element.value.length > 0){
+    element.style.height = "auto"; // Réinitialiser la hauteur à "auto" pour mesurer correctement le scrollHeight
+    if (element.value.length > 0) {
       setActive(true);
-    }
-    else {
+    } else {
       setActive(false);
     }
-    element.style.height = element.scrollHeight + 'px';
-    console.log(element.style.height);  
-    
-    
+    element.style.height = element.scrollHeight + "px";
+  };
+
+  const handleUpload = async () => {
+    if (!selectedFile) {
+      alert("Veuillez sélectionner un fichier Excel.");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("excelFile", selectedFile);
+    formData.append("requestText", value);
+    dispatch(postFileThunk(formData, value));
+    setValue("");
   };
 
   return (
     <div className="textarea-container">
       <textarea
-        className='input-text'
+        className="input-text"
         placeholder="Send a message"
-        rows="1" 
-        cols = "10"
-        value={valeur}
+        rows="1"
+        cols="10"
+        value={value}
         onInput={(e) => ajusterHauteurTextarea(e.target)}
         onChange={handleChange}
       />
 
-    <div className='button-group'>
-      <div className="input-file-container">
-          <input type="file" id="customFileInput" />
+      <div className="button-group">
+        <div className="input-file-container">
+          <input type="file" id="customFileInput" onChange={handleFileChange} />
           <label htmlFor="customFileInput">
-              <i className="fas fa-upload icon-sidebar-footer"></i>
+            <i className="fas fa-upload icon-sidebar-footer"></i>
           </label>
         </div>
-        <div className={active ? 'icon-send active' : 'icon-send'}>
-          <i className="fa-regular fa-paper-plane icon-sidebar-footer" ></i>
+        {loading ? (
+          <div className="spinner">
+            <div className="dot"></div>
+            <div className="dot"></div>
+            <div className="dot"></div>
+          </div>
+        ) : (
+          <div
+            className={active ? "icon-send active" : "icon-send"}
+            onClick={handleUpload}
+          >
+            <i className="fa-regular fa-paper-plane icon-sidebar-footer"></i>
+          </div>
+        )}
       </div>
-    </div>
-      
     </div>
   );
 }

@@ -8,6 +8,10 @@ function ChatBox() {
   const dispatch = useDispatch();
   const {showSidebar, showSmallSidebar} = SidebarSlice.actions;
   const hide = useSelector(state => state.sidebar.close);
+
+  const dataText = useSelector(state => state.files.text);
+  console.log(dataText);
+  
   function showSidebarFn() {
     dispatch(showSidebar());
   }
