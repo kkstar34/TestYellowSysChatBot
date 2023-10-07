@@ -52,7 +52,7 @@ export const postFileThunk = (data, text) => {
                   'Content-Type': 'multipart/form-data',
                 },
               });
-            console.log("succès : requete envoyée avec succès")
+            // console.log("succès : requete envoyée avec succès")
             const dataResponse = {
                 mine : false,
                 data : response.data
