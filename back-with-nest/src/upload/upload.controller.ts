@@ -5,18 +5,18 @@ import { extname } from 'path';
 import { AxiosResponse } from 'axios';
 import axios from 'axios';
 
-const storage = diskStorage({
-  destination: './uploads', // Répertoire de stockage des fichiers
-  filename: (req, file, callback) => {
-    const randomName = Array(32).fill(null).map(() => (Math.round(Math.random() * 16)).toString(16)).join('');
-    return callback(null, `${randomName}${extname(file.originalname)}`);
-  },
-});
+// const storage = diskStorage({
+//   destination: './uploads', // Répertoire de stockage des fichiers
+//   filename: (req, file, callback) => {
+//     const randomName = Array(32).fill(null).map(() => (Math.round(Math.random() * 16)).toString(16)).join('');
+//     return callback(null, `${randomName}${extname(file.originalname)}`);
+//   },
+// });
 
 @Controller('files')
 export class UploadController {
   @Post('upload')
-  @UseInterceptors(FileInterceptor('excelFile', { storage }))
+  // @UseInterceptors(FileInterceptor('excelFile', { storage }))
   async uploadFile( 
     @UploadedFile() file: Express.Multer.File,
     @Body('requestText') requestText: string,
