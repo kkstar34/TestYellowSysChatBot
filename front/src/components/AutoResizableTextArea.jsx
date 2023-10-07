@@ -52,7 +52,8 @@ function AutoResizableTextarea() {
     setSelectedFile(null);
 
     }else{
-        alert('Ce test ne prend en compte que les fichier xslx ou csv')
+        alert('Ce test ne prend en compte que les fichier xslx ou csv');
+        return;
     }
   };
 
