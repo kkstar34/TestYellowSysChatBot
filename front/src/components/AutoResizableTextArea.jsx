@@ -42,11 +42,7 @@ function AutoResizableTextarea() {
 
     const fileExtension = selectedFile.name.split('.').pop().toLowerCase();
   
-    if (fileExtension !== 'xlsx' || fileExtension !== 'csv') {
-      alert('Ce test ne prend en compte que les fichier xslx ou csv')
-      return;
-    }
-
+    if (fileExtension == 'xlsx' || fileExtension=="cvs") {
 
     const formData = new FormData();
     formData.append("excelFile", selectedFile);
@@ -54,6 +50,10 @@ function AutoResizableTextarea() {
     dispatch(postFileThunk(formData, value));
     setValue("");
     setSelectedFile(null);
+
+    }else{
+        alert('Ce test ne prend en compte que les fichier xslx ou csv')
+    }
   };
 
   return (
