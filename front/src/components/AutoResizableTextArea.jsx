@@ -40,6 +40,7 @@ function AutoResizableTextarea() {
     formData.append("requestText", value);
     dispatch(postFileThunk(formData, value));
     setValue("");
+    setSelectedFile(null);
   };
 
   return (
