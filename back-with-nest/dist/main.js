@@ -64,14 +64,14 @@ exports.AppModule = void 0;
 const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
 const app_controller_1 = __webpack_require__(/*! ./app.controller */ "./src/app.controller.ts");
 const app_service_1 = __webpack_require__(/*! ./app.service */ "./src/app.service.ts");
-const upload_controller_1 = __webpack_require__(/*! ./upload/upload.controller */ "./src/upload/upload.controller.ts");
+const file_controller_1 = __webpack_require__(/*! ./file/file.controller */ "./src/file/file.controller.ts");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [],
-        controllers: [app_controller_1.AppController, upload_controller_1.UploadController],
+        controllers: [app_controller_1.AppController, file_controller_1.FileController],
         providers: [app_service_1.AppService],
     })
 ], AppModule);
@@ -108,10 +108,10 @@ exports.AppService = AppService = __decorate([
 
 /***/ }),
 
-/***/ "./src/upload/upload.controller.ts":
-/*!*****************************************!*\
-  !*** ./src/upload/upload.controller.ts ***!
-  \*****************************************/
+/***/ "./src/file/file.controller.ts":
+/*!*************************************!*\
+  !*** ./src/file/file.controller.ts ***!
+  \*************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -127,12 +127,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-var _a, _b, _c;
+var _a, _b, _c, _d;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.UploadController = void 0;
+exports.FileController = void 0;
 const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
+const multer_1 = __webpack_require__(/*! @nestjs/platform-express/multer */ "@nestjs/platform-express/multer");
+const multer_2 = __webpack_require__(/*! multer */ "multer");
+const path_1 = __webpack_require__(/*! path */ "path");
+const path = __webpack_require__(/*! path */ "path");
 const axios_1 = __webpack_require__(/*! axios */ "axios");
-let UploadController = class UploadController {
+const storage = (0, multer_2.diskStorage)({
+    destination: '/tmp',
+    filename: (req, file, callback) => {
+        const randomName = Array(32).fill(null).map(() => (Math.round(Math.random() * 16)).toString(16)).join('');
+        return callback(null, `${randomName}${(0, path_1.extname)(file.originalname)}`);
+    },
+});
+let FileController = class FileController {
     async uploadFile(file, requestText) {
         try {
             if (!file) {
@@ -149,22 +160,39 @@ let UploadController = class UploadController {
         }
         catch (error) {
             console.error("Erreur lors de l'envoi du fichier Excel vers l'API de destination :", error.message);
-            return "Erreur lors de l'envoi du fichier Excel vers l'API de destination.";
+            console.log(file);
+            return file.filename;
         }
     }
+    async downloadFile(fileName, res) {
+        const filePath = path.join(__dirname, '../tmp/', fileName);
+        console.log(fileName);
+        res.setHeader('Content-Type', 'application/octet-stream');
+        res.setHeader('Content-Disposition', `attachment; filename=${fileName}`);
+        res.sendFile(filePath);
+    }
 };
-exports.UploadController = UploadController;
+exports.FileController = FileController;
 __decorate([
     (0, common_1.Post)('upload'),
+    (0, common_1.UseInterceptors)((0, multer_1.FileInterceptor)('excelFile', { storage })),
     __param(0, (0, common_1.UploadedFile)()),
     __param(1, (0, common_1.Body)('requestText')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [typeof (_b = typeof Express !== "undefined" && (_a = Express.Multer) !== void 0 && _a.File) === "function" ? _b : Object, String]),
     __metadata("design:returntype", typeof (_c = typeof Promise !== "undefined" && Promise) === "function" ? _c : Object)
-], UploadController.prototype, "uploadFile", null);
-exports.UploadController = UploadController = __decorate([
-    (0, common_1.Controller)('files')
-], UploadController);
+], FileController.prototype, "uploadFile", null);
+__decorate([
+    (0, common_1.Get)('download/:fileName'),
+    __param(0, (0, common_1.Param)('fileName')),
+    __param(1, (0, common_1.Res)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, typeof (_d = typeof Response !== "undefined" && Response) === "function" ? _d : Object]),
+    __metadata("design:returntype", Promise)
+], FileController.prototype, "downloadFile", null);
+exports.FileController = FileController = __decorate([
+    (0, common_1.Controller)()
+], FileController);
 
 
 /***/ }),
@@ -189,6 +217,16 @@ module.exports = require("@nestjs/core");
 
 /***/ }),
 
+/***/ "@nestjs/platform-express/multer":
+/*!**************************************************!*\
+  !*** external "@nestjs/platform-express/multer" ***!
+  \**************************************************/
+/***/ ((module) => {
+
+module.exports = require("@nestjs/platform-express/multer");
+
+/***/ }),
+
 /***/ "axios":
 /*!************************!*\
   !*** external "axios" ***!
@@ -196,6 +234,26 @@ module.exports = require("@nestjs/core");
 /***/ ((module) => {
 
 module.exports = require("axios");
+
+/***/ }),
+
+/***/ "multer":
+/*!*************************!*\
+  !*** external "multer" ***!
+  \*************************/
+/***/ ((module) => {
+
+module.exports = require("multer");
+
+/***/ }),
+
+/***/ "path":
+/*!***********************!*\
+  !*** external "path" ***!
+  \***********************/
+/***/ ((module) => {
+
+module.exports = require("path");
 
 /***/ })
 

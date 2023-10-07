@@ -1,12 +1,13 @@
-import { Controller, Post, UploadedFile, UseInterceptors, Body } from '@nestjs/common';
+import { Controller, Post, UploadedFile, UseInterceptors, Body, Get, Param, Res } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express/multer';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
+import * as path from 'path';
 import { AxiosResponse } from 'axios';
 import axios from 'axios';
 
 const storage = diskStorage({
-  destination: '/tmp', // Répertoire de stockage des fichiers
+  destination: '/tmp', // Répertoire de stockage des fichiers ./uploads
   filename: (req, file, callback) => {
     const randomName = Array(32).fill(null).map(() => (Math.round(Math.random() * 16)).toString(16)).join('');
     return callback(null, `${randomName}${extname(file.originalname)}`);
@@ -14,7 +15,7 @@ const storage = diskStorage({
 });
 
 @Controller()
-export class UploadController {
+export class FileController {
   @Post('upload')
   @UseInterceptors(FileInterceptor('excelFile', { storage }))
   async uploadFile( 
@@ -43,4 +44,20 @@ export class UploadController {
       // return "Erreur lors de l'envoi du fichier Excel vers l'API de destination.";
     }
   }
+
+  @Get('download/:fileName')
+  async downloadFile(@Param('fileName') fileName: string, @Res() res: Response) {
+    const filePath = path.join(__dirname, '../tmp/', fileName);
+    //  const filePath = path.join(__dirname, '../uploads/', fileName);
+    console.log(fileName);
+
+    // Réglez les en-têtes de la réponse pour indiquer qu'il s'agit d'un fichier à télécharger.
+    res.setHeader('Content-Type', 'application/octet-stream');
+    res.setHeader('Content-Disposition', `attachment; filename=${fileName}`);
+
+    // Envoyez le fichier en réponse.
+    res.sendFile(filePath);
+  }
+
 }
+
