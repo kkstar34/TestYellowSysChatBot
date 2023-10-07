@@ -134,7 +134,6 @@ const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
 const multer_1 = __webpack_require__(/*! @nestjs/platform-express/multer */ "@nestjs/platform-express/multer");
 const multer_2 = __webpack_require__(/*! multer */ "multer");
 const path_1 = __webpack_require__(/*! path */ "path");
-const path = __webpack_require__(/*! path */ "path");
 const axios_1 = __webpack_require__(/*! axios */ "axios");
 const storage = (0, multer_2.diskStorage)({
     destination: '/tmp',
@@ -165,7 +164,6 @@ let FileController = class FileController {
         }
     }
     async downloadFile(fileName, res) {
-        const filePath = path.join(__dirname, '../tmp/', fileName);
         console.log(fileName);
         res.setHeader('Content-Type', 'application/octet-stream');
         res.setHeader('Content-Disposition', `attachment; filename=${fileName}`);

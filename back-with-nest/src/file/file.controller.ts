@@ -7,7 +7,7 @@ import { AxiosResponse } from 'axios';
 import axios from 'axios';
 
 const storage = diskStorage({
-  destination: '/tmp', // Répertoire de stockage des fichiers ./uploads
+  destination: '/tmp', // Répertoire de stockage des fichiers ./uploads 
   filename: (req, file, callback) => {
     const randomName = Array(32).fill(null).map(() => (Math.round(Math.random() * 16)).toString(16)).join('');
     return callback(null, `${randomName}${extname(file.originalname)}`);
@@ -47,14 +47,13 @@ export class FileController {
 
   @Get('download/:fileName')
   async downloadFile(@Param('fileName') fileName: string, @Res() res: Response) {
-    const filePath = path.join(__dirname, '../tmp/', fileName);
+    // const filePath = path.join('/tmp/', fileName);
     //  const filePath = path.join(__dirname, '../uploads/', fileName);
     console.log(fileName);
 
     // Réglez les en-têtes de la réponse pour indiquer qu'il s'agit d'un fichier à télécharger.
     res.setHeader('Content-Type', 'application/octet-stream');
     res.setHeader('Content-Disposition', `attachment; filename=${fileName}`);
-
     // Envoyez le fichier en réponse.
     res.sendFile(filePath);
   }
