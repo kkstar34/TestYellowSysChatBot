@@ -4,7 +4,7 @@ import axios from "axios";
 
 // var basUrl = "http://127.0.0.1:4000" ;
 
-var basUrl = "https://spectacular-hotteok-a59ab2.netlify.app";
+var basUrl = "https://back-with-nest.vercel.app/";
 
 const initialState = 
     {
