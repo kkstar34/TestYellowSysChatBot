@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import rootReducer from './redux/slices';
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
+import { ThemeProvider } from './context/ThemeContext';
 
 
 const store = configureStore({
@@ -16,7 +17,9 @@ root.render(
 
   <Provider store={store}>
     <React.StrictMode>
+    <ThemeProvider>
       <App />
+    </ThemeProvider>
     </React.StrictMode>
   </Provider>
 );

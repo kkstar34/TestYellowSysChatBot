@@ -3,10 +3,13 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { SidebarSlice } from '../redux/slices/sidebar';
 import { createPortal } from 'react-dom';
+import { useTheme } from '../context/ThemeContext';
 
 function SidebarSmallScreen() {
 
   //i must do with click away
+
+  const {theme, toggleTheme} = useTheme();
   const dispatch = useDispatch();
   const {hideSmallSidebar} = SidebarSlice.actions;
   const hide = useSelector(state => state.sidebar.smallClose);
@@ -18,7 +21,7 @@ function SidebarSmallScreen() {
     /*aside-close*/
     createPortal(
       <>
-      <div className={ hide ? "aside-small" : "aside-small aside-small-show"}> 
+      <div className={ hide ?  `aside-small ${theme}` : `aside-small aside-small-show  ${theme}`}> 
         <div className="sidebar-container">
           <div className="sidebar-header">
               <div className="row">
@@ -31,7 +34,7 @@ function SidebarSmallScreen() {
                     </div>
                   </div>
                   <div className="close-small-sidebar-icon"onClick={closeSidebar} >
-                    <i className="fa-solid fa-xmark " style={{color: "#ffffff"}}></i>
+                    <i className="fa-solid fa-xmark icon-xmark"></i>
                   </div>
               </div>
           </div>
@@ -44,11 +47,8 @@ function SidebarSmallScreen() {
           <div className="sidebar-small-footer">
               <div className="items-small">
                 <div className="item-small">
-                  <div className="icon">
-                    <i className="fa-regular fa-moon icon-sidebar-small-footer" ></i>
-                  </div>
-  
-                  <div className="name-small">
+                {theme === 'dark' ?  "🌙" : "🔆"}
+                  <div className="name-small" onClick={toggleTheme}  >
                     <span>Dark mode</span>
                   </div>
                 </div>

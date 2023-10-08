@@ -1,28 +1,58 @@
 import React, { useState, useEffect } from 'react';
 
-const TypingEffect = ({ text, speed,downloadExcel , filename , delay }) => {
+const TypingEffect = ({ text, speed,downloadExcel , filename , delay, id }) => {
   const [displayText, setDisplayText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
+
+
+ 
+
+  function bindLink () {
+    const a = document.querySelector(`#download-${id}`);
+    console.log('function bindLink')
+    console.log(a)
+    if(a){
+          a.addEventListener('click', downloadEx)
+      }
+    }
+
+
+  function downloadEx(){
+    console.log('click');
+    return downloadExcel(filename);
+  }
+
+ 
 
   useEffect(() => {
     const typingInterval = setInterval(() => {
       if (currentIndex < text.length) {
         setDisplayText(text.substring(0, currentIndex + 1));
         setCurrentIndex(currentIndex + 1);
-      } else {
+      }
+      else {
         clearInterval(typingInterval);
+        bindLink()
       }
     }, speed);
-
     return () => {
+      // unBindLink();
       clearInterval(typingInterval);
     };
+
   }, [text, currentIndex, speed]);
 
-  return <span style={{ lineHeight: "1.8" }}>{displayText} <a href="#dowload" onClick={(e)=>{
-    e.preventDefault();
-    return downloadExcel(filename);
-  }}><span>Télécharger <i className="fa-solid fa-download"></i></span></a> | eta : {delay} (ms) </span>;
+
+  useEffect(() => {
+    return ()=>{
+      // unBindLink();
+    }
+  }, []);
+
+
+
+
+  return <span style={{ lineHeight: "1.8" }} dangerouslySetInnerHTML={{ __html: displayText }}   /> ;
 };
 
 export default TypingEffect;

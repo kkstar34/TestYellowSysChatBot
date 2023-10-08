@@ -1,16 +1,17 @@
 
 :root{
-  --sidebar-bg-color :#202123;
-  --chat-box-bg-color : #343541;
-  --light-withe : rgba(255, 255, 255, 0.2);
+  --sidebar-bg-dark-color :#202123;
+  --chat-box-bg-dark-color : #343541;
+  --light--dark-withe :rgba(255, 255, 255, 0.2);
   --history-color : #8E8EA0;
   --input-color :#40414F;
   --icon-send-color :rgb(25, 195, 125);
+
 }
 
 
 .app{
-  background-color: var(--chat-box-bg-color);
+  background-color: var(--chat-box-bg-dark-color);
 }
 
 ::-webkit-scrollbar {
@@ -20,7 +21,7 @@
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: var(--sidebar-bg-color);
+  background: var(--sidebar-bg-dark-color);
 }
 
 /* Handle */
@@ -41,8 +42,8 @@
 }
 
 .aside{
-  width: 400px;
-  background-color: #202123;
+  width: 260px;
+  background-color: var(--sidebar-bg-dark-color);
   padding: 1rem;
   transition:  ease-in-out 0.3s;
   height: 100%;
@@ -70,26 +71,30 @@
 }
 
 .chat-box{
-  width: 100%;
+  width: calc(100% - 260px);
   background-color: #343541;
   display: flex ;
   flex-direction: column ;
-  justify-content: space-between;
+  transition: ease-in-out 0.5s;
+  /* justify-content: space-between; */
+  /* padding: 1rem 13%; */
+  overflow-y: scroll;
 }
 
 .new-chat{
-  border-radius: 0.5rem;
+  border-radius: 0.4rem;
   display: flex;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  padding: 1rem;
+  padding: 0.5rem;
   color: white;
   width: 75%;
   cursor: pointer;
   font-size: 1rem;
+  align-items: center;
 }
 
 .new-chat-small {
-  border-radius: 0.5rem;
+  border-radius: 0.4rem;
   display: flex;
   border: 1px solid rgba(255, 255, 255, 0.2);
   padding: 0.8rem;
@@ -115,7 +120,7 @@
 }
 .close-sidebar-icon{
   width: 20%;
-  border-radius: 0.5rem;
+  border-radius: 0.4rem;
   display: flex;
   border: 1px solid rgba(255, 255, 255, 0.2);
   padding: 1rem;
@@ -137,6 +142,9 @@
   cursor: pointer;
   font-size: 1rem;
   opacity: 1;
+}
+.icon-xmark{
+  color: white;
 }
 
 .open-sidebar-icon{
@@ -241,9 +249,7 @@
 
 
 
-.chat-box{
-  padding: 1rem 15%;
-}
+
 
 .input-text{
   background-color: var(--input-color );
@@ -273,7 +279,7 @@
 
 
 .textarea-container{
-  border-radius: 0.8rem;
+  border-radius: 0.4rem;
   background-color: var(--input-color);
   position: relative;
   width: 100%;
@@ -340,28 +346,64 @@ label i{
 }
 
 .chat-content{
-  height:70%;
+  height:75%;
+  padding: 0 18%;
   overflow-y: scroll;
-  padding: 0 1rem;
-}
-
-.chat-footer{
-  display: flex;
-  align-items: center;
+  transition: ease-in-out 0.3;
   
 }
 
+.bot-response{
+  background-color: rgba(68,70,84,1);
+}
+
+
+.chat-footer{
+  position: fixed;
+  width: calc(100% - 260px);
+  bottom: 0rem;
+  padding: 2rem 18%;
+  background-color:#343541;
+  transition: ease-in-out 0.5s;
+  border-top: 1px solid var(--light--dark-withe);
+  box-shadow: 0 -5px 10px rgba(0,0,0,0.5);
+}
+
+.chat-box-w-full .chat-footer{
+  width: 100%;
+}
+
+.textarea-box{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: end;
+  /* padding-right: 2rem;
+  padding-left: 2rem; */
+}
+
 .icon-bars{
-  color: var(--light-withe);
+  color: var(--light--dark-withe);
   font-size: 2rem;
   cursor: pointer;
   display: none;
+}
+
+.download{
+  text-decoration: underline;
+  color : rgba(41,100,170,1);
+  cursor: pointer;
+}
+
+.download:hover{
+  color : rgba(98,154,221,1)
 }
 
 
 .response-row{
   margin-top: 1rem;
   display : flex;
+
  
   /* align-items: center; */
   /* position: relative; */
@@ -383,11 +425,33 @@ label i{
   width: 95%;
   word-wrap: break-word; 
   margin-left: 0.8rem;
+  transition: ease-in-out 0.5s;
   
 }
 
 .chat-row{
   margin-bottom: 5rem;
+}
+
+.chat-header{
+  height: 10%;
+  position: sticky;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  border-bottom: 1px solid var(--light--dark-withe);
+  transition: ease-in-out 0.3s;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+}
+
+.model-box{
+  color : white;
+}
+
+
+.tokens-container-small{
+  display: none;
 }
 
 @media screen and ((min-width: 768px) and (max-width: 1024px)){
@@ -478,13 +542,23 @@ label i{
     right: 2rem;
   }
 
-  .container{
-    height: calc(100vh - 100px); 
-    overflow: hidden;
+  .chat-content{
+    height: 75%;
+    padding : 0 0.5rem;
   }
 
+  .container{
+    height: 100svh; 
+  
+  }
+
+  .chat-footer{
+    padding : 0.5rem 10% !important;
+  }
+
+  
   .aside{
-    height: calc(100vh - 100px); 
+    height: 100svh; 
   }
 }
 
@@ -496,16 +570,47 @@ label i{
     font-size: 0.5rem;
 
   }
+
+  .open-sidebar-icon{
+
+    display: none;
+  }
+  .response-row{
+   
+    padding-right: 1.2rem;
+   
+    /* align-items: center; */
+    /* position: relative; */
+  }
+
+  .chat-content{
+    height: 75%;
+    padding : 0 0.5rem;
+  }
+
+  .tokens-container{
+    display: none;
+  }
+  .tokens-container-small{
+    display: block;
+    margin-right: 0.5rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .tokens-small{
+    color: white;
+    font-size: 0.8rem
+  }
  
   .aside{
-    height: calc(100vh - 100px); 
+    height: 100svh; 
   }
   .container{
-    height: calc(100vh - 100px); 
-    overflow: hidden;
+    height: 100svh; 
   }
   .chat-box{
-    padding: 1rem 1rem 2.5rem 1rem;
+    width: 100%;
+  
   }
 
   .input-text{
@@ -514,7 +619,7 @@ label i{
     font-size:16px;
     resize: none; 
     overflow: hidden;
-    width: 70%;
+    width: 80%;
   }
 
   .icon-send{
@@ -526,8 +631,8 @@ label i{
 
   .button-group{
     bottom: 0.5rem;
-    width: 30%;
-    right: 1.5rem;
+    width: 20%;
+    right: 0.2rem;
   }
 
   .button-group i{
@@ -535,6 +640,14 @@ label i{
   }
 
 
+
+  .chat-footer{
+    position: fixed;
+    width: 100%;
+    bottom: 0rem;
+    padding: 1.5rem 10%;
+    background-color: var(--sidebar-bg-dark-color);
+  }
 
  
 
@@ -550,10 +663,36 @@ label i{
   }
 
   .textarea-container {
-    border-radius: 0.5rem;
+    border-radius: 0.3rem;
   }
   
   .response-text{
     margin-left: 1.5rem;
   }
 }
+
+/* mode clair */
+
+
+
+
+.app.clear .chat-box{
+  background-color: white;
+}
+.app.clear .chat-footer{
+  background-color: white;
+}
+
+.app.clear .response-text{
+  color: black;
+}
+.app.clear .model-box{
+  color: black;
+}
+.app.clear .icon-bars{
+  color: black !important;
+}
+
+
+
+

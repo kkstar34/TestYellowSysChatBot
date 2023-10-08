@@ -2,12 +2,16 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { SidebarSlice } from '../redux/slices/sidebar';
+import { useTheme } from '../context/ThemeContext';
 
 function Sidebar() {
 
+
+  const {theme, toggleTheme} = useTheme()
   const dispatch = useDispatch();
   const {hideSidebar} = SidebarSlice.actions;
   const hide = useSelector(state => state.sidebar.close);
+
   function closeSidebar() {
     dispatch(hideSidebar());
   }
@@ -41,11 +45,8 @@ function Sidebar() {
         <div className="sidebar-footer">
             <div className="items">
               <div className="item">
-                <div className="icon">
-                  <i className="fa-regular fa-moon icon-sidebar-footer" ></i>
-                </div>
-
-                <div className="name">
+                {theme === 'dark' ?  "🌙" : "🔆"}
+                <div className="name" onClick={toggleTheme}>
                   <span>Dark mode</span>
                 </div>
               </div>

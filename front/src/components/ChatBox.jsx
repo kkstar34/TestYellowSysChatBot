@@ -62,7 +62,12 @@ function ChatBox() {
             style={{ color: "#ffffff" }}
           ></i>
         </div>
-        <div className="model-box"></div>
+        <div className="model-box">
+         <span>Default (GPT-3.5)</span>
+        </div>
+        <div className="model-box">
+         <span><i className="fa-solid fa-arrow-up-from-bracket"></i></span>
+        </div>
       </div>
 
       <div className="chat-content">
@@ -87,12 +92,13 @@ function ChatBox() {
                   <div className="response-text">
                     <p>
                       <TypingEffect
-                        text="La génération du fichier Excel a été effectuée avec succès. 
-                        Vous pouvez télécharger le fichier à partir du lien suivant :"
+                        text={`La génération du fichier Excel a été effectuée avec succès. 
+                        Vous pouvez télécharger le fichier à partir du lien suivant : <span id=download-${i} class="download">Télécharger <i className="fa-solid fa-download"></i></span>`}
                         speed={15}
                         downloadExcel = {downloadExcel}
                         filename = {elt.data}
                         delay = {elt.elapsedTime}
+                        id = {i}
                       />
                     </p>
 
@@ -105,8 +111,11 @@ function ChatBox() {
         })}
       </div>
 
+      
       <div className="chat-footer">
-        <AutoResizableTextarea />
+        <div className="textarea-box">
+          <AutoResizableTextarea />
+        </div>
       </div>
     </div>
   );

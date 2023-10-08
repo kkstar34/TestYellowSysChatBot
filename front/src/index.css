@@ -20,9 +20,9 @@ body{
     width: 65%;
     background-color: #202123;
     padding: 1rem;
-    transition:  ease-in-out 0.3s;
-    height: calc(100vh - 100px); 
-    box-shadow: 200px 0px 10px rgba(255, 255, 255, 0.2);
+    transition:  linear 0.5s;
+    height: 100svh; 
+   box-shadow: 200px 0px 10px rgba(255, 255, 255, 0);
   }
 
 
@@ -30,6 +30,7 @@ body{
   
   .aside-small-show{
     left: 0;
+    box-shadow: 200px 0px 10px rgba(255, 255, 255, 0.2);
   }
 
 }
@@ -41,5 +42,20 @@ body{
   }
 
 }
+
+
+.aside-small.clear .icon-xmark{
+  color: black !important;
+
+}
+.aside-small.clear .close-small-sidebar-icon{
+  border: 1px solid black !important;
+}
+
+.aside-small.aside-small-show.clear {
+  box-shadow: 200px 0px 10px rgba(0, 0, 0, 0.7);
+}
+
+
 
 

@@ -59,7 +59,7 @@ function AutoResizableTextarea() {
 
     const fileExtension = selectedFile.name.split('.').pop().toLowerCase();
   
-    if (fileExtension == 'xlsx' || fileExtension=="cvs") {
+    if (fileExtension === 'xlsx' || fileExtension === "cvs") {
 
     const formData = new FormData();
     formData.append("excelFile", selectedFile);
@@ -78,7 +78,15 @@ function AutoResizableTextarea() {
   };
 
   return (
+    <>
+        <div className="tokens-container-small">
+        <span className="tokens-small">
+        {`Tokens : ${nbTokens}`}
+        </span>
+    </div>
     <div className="textarea-container">
+    
+
       <textarea
         className="input-text"
         placeholder="Send a message"
@@ -91,7 +99,7 @@ function AutoResizableTextarea() {
 
       <div className="button-group">
 
-      <div className="input-file-container">
+      <div className="tokens-container">
           <span className="tokens">
            {`Tokens : ${nbTokens}`}
           </span>
@@ -127,6 +135,7 @@ function AutoResizableTextarea() {
         )}
       </div>
     </div>
+    </>
   );
 }
 
