@@ -378,6 +378,8 @@ label i{
   justify-content: center;
   flex-direction: column;
   align-items: end;
+ 
+
   /* padding-right: 2rem;
   padding-left: 2rem; */
 }
@@ -644,9 +646,9 @@ label i{
   .chat-footer{
     position: fixed;
     width: 100%;
-    bottom: 0rem;
+    bottom: 0.5rem;
     padding: 1.5rem 10%;
-    background-color: var(--sidebar-bg-dark-color);
+    background-color: #343541;
   }
 
  
@@ -668,6 +670,10 @@ label i{
   
   .response-text{
     margin-left: 1.5rem;
+  }
+
+  .textarea-box{
+    margin-bottom: 1rem
   }
 }
 
