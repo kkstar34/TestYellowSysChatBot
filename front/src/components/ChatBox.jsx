@@ -58,8 +58,7 @@ function ChatBox() {
           onClick={showSidebarFn}
         >
           <i
-            className="fa-regular fa-closed-captioning"
-            style={{ color: "#ffffff" }}
+            className="fa-regular fa-closed-captioning open-sidebar-icon-i"
           ></i>
         </div>
         <div className="model-box">
