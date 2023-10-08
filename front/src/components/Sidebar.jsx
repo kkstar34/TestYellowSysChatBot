@@ -44,9 +44,9 @@ function Sidebar() {
         </div>
         <div className="sidebar-footer">
             <div className="items">
-              <div className="item">
+              <div className="item" onClick={toggleTheme}>
                 {theme === 'dark' ?  "🌙" : "🔆"}
-                <div className="name" onClick={toggleTheme}>
+                <div className="name" >
                   <span>Dark mode</span>
                 </div>
               </div>

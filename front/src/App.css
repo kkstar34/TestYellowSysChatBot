@@ -204,7 +204,7 @@
 
 
 .items{
-  padding:0  1rem;
+  padding:1rem  0rem;
   width: 100%;
 }
 
@@ -225,8 +225,15 @@
 
 .item{
   display: flex;
-  margin-top: 2rem;
   cursor: pointer;
+  padding: 0.8rem;
+  margin-bottom: 0.2rem;
+}
+
+.item:hover{
+  background-color: var(--chat-box-bg-dark-color);
+  border-radius: 0.2rem;
+ 
 }
 
 .item-small {
@@ -449,7 +456,10 @@ label i{
 
 .model-box{
   color : white;
+  cursor: pointer;
 }
+
+
 
 
 .tokens-container-small{
