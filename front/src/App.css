@@ -458,7 +458,7 @@ label i{
   height: 0;
   visibility: hidden;
   opacity: 0;
-  padding: 0rem;
+   padding: 0rem;
   transform: translateY(-100%);
 }
 
@@ -563,7 +563,7 @@ label i{
   }
 
   .chat-content{
-    height: 73%;
+    height: 75%;
     padding : 0 0.5rem;
   }
 
@@ -604,7 +604,7 @@ label i{
   }
 
   .chat-content{
-    height: 73%;
+    height: 75%;
     padding : 0 1rem 2rem 1rem;
   }
 

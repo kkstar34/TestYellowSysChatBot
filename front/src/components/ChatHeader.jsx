@@ -38,17 +38,17 @@ function ChatHeader() {
   }, [prevScrollPos]);
 
 
-  useEffect(() => {
+//   useEffect(() => {
     
-    const chatBox = document.querySelector('.chat-content');
-    if(isHeaderVisible){
-        chatBox.style.height = "73%";
-    }else{
-        chatBox.style.height = "83%";
-    }
+//     const chatBox = document.querySelector('.chat-content');
+//     if(isHeaderVisible){
+//         chatBox.style.height = "73%";
+//     }else{
+//         chatBox.style.height = "83%";
+//     }
     
 
-  }, [isHeaderVisible])
+//   }, [isHeaderVisible])
 
 
   return (
