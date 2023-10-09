@@ -8,7 +8,6 @@ import ChatHeader from "./ChatHeader";
 function ChatBox() {
   
   const hide = useSelector((state) => state.sidebar.close);
-
   const dataText = useSelector((state) => state.files.text);
   const baseUrl = useSelector((state) => state.files.baseUrl);
 

@@ -13,6 +13,7 @@ const initialState =
        link : '',
        loading : false,
        text : [],
+       progress : 0,
     }
 
 export const fileSlice = createSlice({
@@ -24,6 +25,9 @@ export const fileSlice = createSlice({
             const textArray = state.text;
             state.text = [...textArray, payload];
          
+        },
+        postFileInProgess : (state, {payload}) => {
+            state.progress = payload
         },
 
         postFileSuccess : (state, {payload}) => {
@@ -42,7 +46,7 @@ export const fileSlice = createSlice({
 
 })
 
-const {postFile, postFileSuccess, postFileFailure} = fileSlice.actions;
+const {postFile,postFileInProgess, postFileSuccess, postFileFailure} = fileSlice.actions;
 
 export const postFileThunk = (data, text) => {
     return async (dispatch) => {
@@ -57,16 +61,21 @@ export const postFileThunk = (data, text) => {
                 headers: {
                   'Content-Type': 'multipart/form-data',
                 },
-              });
-            // console.log("succès : requete envoyée avec succès")
-            const endTime = performance.now();
-            const elapsedTime = endTime - startTime;
-            const dataResponse = {
-                mine : false,
-                data : response.data,
-                elapsedTime : elapsedTime
-            }
-            dispatch(postFileSuccess(dataResponse));
+                onUploadProgress: (progressEvent) => {
+                    const progress = (progressEvent.loaded / progressEvent.total) * 100;
+                    dispatch(postFileInProgess(progress));
+                }
+        });
+
+        // console.log("succès : requete envoyée avec succès")
+        const endTime = performance.now();
+        const elapsedTime = endTime - startTime;
+        const dataResponse = {
+            mine : false,
+            data : response.data,
+            elapsedTime : elapsedTime
+        }
+        dispatch(postFileSuccess(dataResponse));
 
         }
 
