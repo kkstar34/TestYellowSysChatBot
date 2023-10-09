@@ -10,6 +10,11 @@
     background-color: #ffffff; /* Couleur des points */
     animation: loading 1.2s infinite;
   }
+
+  .app.clear  .dot{
+    background-color: black;
+  }
+  
   
   .dot:nth-child(2) {
     animation-delay: 0.4s;
