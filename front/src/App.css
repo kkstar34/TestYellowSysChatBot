@@ -449,8 +449,17 @@ label i{
   justify-content: space-between;
   padding: 1rem;
   border-bottom: 1px solid var(--light--dark-withe);
-  transition: ease-in-out 0.3s;
+  /* transition: ease-in-out 0.3s; */
   box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+  transition: ease-in-out 0.5s ;
+}
+
+.chat-header.hidden {
+  height: 0;
+  visibility: hidden;
+  opacity: 0;
+  padding: 0rem;
+  transform: translateY(-100%);
 }
 
 .model-box{
@@ -554,7 +563,7 @@ label i{
   }
 
   .chat-content{
-    height: 75%;
+    height: 73%;
     padding : 0 0.5rem;
   }
 
@@ -595,7 +604,7 @@ label i{
   }
 
   .chat-content{
-    height: 75%;
+    height: 73%;
     padding : 0 1rem 2rem 1rem;
   }
 

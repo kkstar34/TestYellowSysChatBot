@@ -1,25 +1,17 @@
 import React from "react";
 import AutoResizableTextarea from "./AutoResizableTextArea";
-import { useDispatch, useSelector } from "react-redux";
-import { SidebarSlice } from "../redux/slices/sidebar";
+import {  useSelector } from "react-redux";
 import axios from "axios";
 import TypingEffect from "./TypingEffect";
+import ChatHeader from "./ChatHeader";
 
 function ChatBox() {
-  const dispatch = useDispatch();
-  const { showSidebar, showSmallSidebar } = SidebarSlice.actions;
+  
   const hide = useSelector((state) => state.sidebar.close);
 
   const dataText = useSelector((state) => state.files.text);
   const baseUrl = useSelector((state) => state.files.baseUrl);
 
-  function showSidebarFn() {
-    dispatch(showSidebar());
-  }
-
-  function showSidebarSmallScreenFn() {
-    dispatch(showSmallSidebar());
-  }
 
   const downloadExcel = async (filename) => {
     try {
@@ -45,30 +37,7 @@ function ChatBox() {
   return (
     // chat-box-w-full
     <div className={!hide ? "chat-box " : "chat-box chat-box-w-full"}>
-      <div className="chat-header">
-        <div className="chat-menu-icon" onClick={showSidebarSmallScreenFn}>
-          <i className="fa-solid fa-bars icon-bars"></i>
-        </div>
-        <div
-          className={
-            !hide
-              ? "open-sidebar-icon open-sidebar-icon-hide"
-              : "open-sidebar-icon "
-          }
-          onClick={showSidebarFn}
-        >
-          <i
-            className="fa-regular fa-closed-captioning open-sidebar-icon-i"
-          ></i>
-        </div>
-        <div className="model-box">
-         <span>Default (GPT-3.5)</span>
-        </div>
-        <div className="model-box">
-         <span><i className="fa-solid fa-arrow-up-from-bracket"></i></span>
-        </div>
-      </div>
-
+      <ChatHeader/>
       <div className="chat-content">
         {dataText && dataText.map((elt, i) => {
           return (
@@ -79,7 +48,7 @@ function ChatBox() {
                     <img src="assets/images/user-avatar.png" alt="" />
                   </div>
                   <div className="response-text">
-                    <span>{elt.data } </span>
+                    <p>{elt.data } </p>
                   </div>
                 </div>
               ) : (
