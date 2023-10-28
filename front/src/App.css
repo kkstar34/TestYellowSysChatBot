@@ -356,7 +356,7 @@ label i{
   height:73%;
   padding: 0 18%;
   overflow-y: scroll;
-  transition: ease-in-out 0.3;
+  /* transition: ease-in-out 0.3s; */
 }
 
 .bot-response{
