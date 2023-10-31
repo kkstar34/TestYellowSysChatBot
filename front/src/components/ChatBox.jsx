@@ -11,6 +11,8 @@ function ChatBox() {
   const dataText = useSelector((state) => state.files.text);
   const baseUrl = useSelector((state) => state.files.baseUrl);
 
+  console.log(dataText)
+
 
   const downloadExcel = async (filename) => {
     try {
@@ -22,7 +24,7 @@ function ChatBox() {
       const url = window.URL.createObjectURL(new Blob([response.data]));
       const link = document.createElement("a");
       link.href = url;
-      link.setAttribute("download", "exemple.xlsx");
+      link.setAttribute("download", "exemple.xlsm");
       document.body.appendChild(link);
       link.click();
 

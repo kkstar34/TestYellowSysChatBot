@@ -70,6 +70,7 @@ export const postFileThunk = (data, text) => {
         // console.log("succès : requete envoyée avec succès")
         const endTime = performance.now();
         const elapsedTime = endTime - startTime;
+        console.log(response);
         const dataResponse = {
             mine : false,
             data : response.data,
