@@ -137,9 +137,9 @@ const path_1 = __webpack_require__(/*! path */ "path");
 const path = __webpack_require__(/*! path */ "path");
 const axios_1 = __webpack_require__(/*! axios */ "axios");
 const fs = __webpack_require__(/*! fs */ "fs");
-var destinationPath = './uploads';
+var destinationPath = '/tmp';
 const storage = (0, multer_2.diskStorage)({
-    destination: './uploads',
+    destination: destinationPath,
     filename: (req, file, callback) => {
         const randomName = Array(32).fill(null).map(() => (Math.round(Math.random() * 16)).toString(16)).join('');
         return callback(null, `${randomName}${(0, path_1.extname)(file.originalname)}`);
@@ -152,31 +152,31 @@ let FileController = class FileController {
                 return 'Aucun fichier Excel téléchargé.';
             }
             const uploadedFile = file;
-            const filePath1 = `./uploads/${uploadedFile.filename}`;
-            fs.readFile(filePath1, async (err, data) => {
-                if (err) {
-                    return 'Erreur lors de la lecture du fichier.';
+            console.log(uploadedFile);
+            const filePath1 = `/tmp/${uploadedFile.filename}`;
+            var data = fs.readFileSync(filePath1);
+            uploadedFile.buffer = data;
+            const fileBlob = new Blob([uploadedFile.buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+            const formData = new FormData();
+            formData.append('file', fileBlob, uploadedFile.originalname);
+            formData.append('query', 'Je souhaite avoir une colonne appelée "Montant HT" qui calcule le produit de la colonne "PU" et "Qte" au niveau de la feuil1');
+            formData.append('username', 'testuser');
+            formData.append('password', 'Ox50KH5cIsApiAMa5Dmz');
+            const response = await axios_1.default.post('http://51.195.62.156:28000/handle_excel_file', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
                 }
-                uploadedFile.buffer = data;
-                const fileBlob = new Blob([uploadedFile.buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-                const formData = new FormData();
-                formData.append('file', fileBlob, uploadedFile.originalname);
-                formData.append('query', requestText);
-                formData.append('username', 'testuser');
-                formData.append('password', 'Ox50KH5cIsApiAMa5Dmz');
-                const response = await axios_1.default.post('https://chatbot-54.234.198.41.sslip.io/handle_excel_file', formData, {
-                    headers: {
-                        'Content-Type': 'multipart/form-data',
-                    }
-                });
-                const filePath = "https://chatbot-54.234.198.41.sslip.io/data/output.xlsx";
-                const responseTwo = await axios_1.default.get(filePath, { responseType: 'arraybuffer' });
-                const fileContent = responseTwo.data;
-                const destinationPath = 'uploads/output.xlsx';
-                fs.writeFileSync(destinationPath, Buffer.from(fileContent));
-                console.log("Fichier Excel transféré avec succès vers l'API de destination. Réponse de l'API de destination :", response.data);
-                return response.data;
             });
+            console.log(response.data.url);
+            const filePath = `http://51.195.62.156:28000/${response.data.url}`;
+            const responseTwo = await axios_1.default.get(filePath, { responseType: 'arraybuffer' });
+            const fileContent = responseTwo.data;
+            let randomName = Array(32).fill(null).map(() => (Math.round(Math.random() * 16)).toString(16)).join('');
+            randomName = `${randomName}${(0, path_1.extname)(response.data.url)}`;
+            const destinationPath = `/tmp/${randomName}`;
+            fs.writeFileSync(destinationPath, Buffer.from(fileContent));
+            console.log("Fichier Excel transféré avec succès vers l'API de destination. Réponse de l'API de destination :", randomName);
+            return randomName;
         }
         catch (error) {
             console.error("Erreur lors de l'envoi du fichier Excel vers l'API de destination :", error);
@@ -184,7 +184,7 @@ let FileController = class FileController {
         }
     }
     async downloadFile(fileName, res) {
-        const filePath = path.join(__dirname, '../uploads/output.xlsx');
+        const filePath = path.join('/tmp/', fileName);
         console.log(fileName);
         res.setHeader('Content-Type', 'application/octet-stream');
         res.setHeader('Content-Disposition', `attachment; filename=${fileName}`);
