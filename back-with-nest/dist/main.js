@@ -159,7 +159,7 @@ let FileController = class FileController {
             const fileBlob = new Blob([uploadedFile.buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
             const formData = new FormData();
             formData.append('file', fileBlob, uploadedFile.originalname);
-            formData.append('query', 'Je souhaite avoir une colonne appelée "Montant HT" qui calcule le produit de la colonne "PU" et "Qte" au niveau de la feuil1');
+            formData.append('query', requestText);
             formData.append('username', 'testuser');
             formData.append('password', 'Ox50KH5cIsApiAMa5Dmz');
             const response = await axios_1.default.post('http://51.195.62.156:28000/handle_excel_file', formData, {
@@ -171,12 +171,26 @@ let FileController = class FileController {
             const filePath = `http://51.195.62.156:28000/${response.data.url}`;
             const responseTwo = await axios_1.default.get(filePath, { responseType: 'arraybuffer' });
             const fileContent = responseTwo.data;
+            function removeChar(str) {
+                const res = str.substr(5, str.length);
+                return res;
+            }
             let randomName = Array(32).fill(null).map(() => (Math.round(Math.random() * 16)).toString(16)).join('');
             randomName = `${randomName}${(0, path_1.extname)(response.data.url)}`;
-            const destinationPath = `/tmp/${randomName}`;
-            fs.writeFileSync(destinationPath, Buffer.from(fileContent));
+            const destinationPath2 = `/tmp/${randomName}`;
+            fs.writeFileSync(destinationPath2, Buffer.from(fileContent));
             console.log("Fichier Excel transféré avec succès vers l'API de destination. Réponse de l'API de destination :", randomName);
             return randomName;
+            function replaceFileExtension(filename) {
+                const lastDotIndex = filename.lastIndexOf(".");
+                if (lastDotIndex === -1) {
+                    return filename;
+                }
+                else {
+                    const newFilename = filename.substring(0, lastDotIndex) + ".xlsm";
+                    return newFilename;
+                }
+            }
         }
         catch (error) {
             console.error("Erreur lors de l'envoi du fichier Excel vers l'API de destination :", error);

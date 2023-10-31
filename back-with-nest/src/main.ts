@@ -17,5 +17,8 @@ async function bootstrap() {
     module.hot.accept();
     module.hot.dispose(() => app.close());
   }
+
+  const maxDuration = 45000; // 45 secondes
+  process.env.MAX_DURATION_MS = maxDuration.toString();
 }
 bootstrap();

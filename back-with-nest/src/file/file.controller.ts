@@ -7,7 +7,7 @@ import { AxiosResponse } from 'axios';
 import axios from 'axios';
 import * as fs from 'fs';
 
-var destinationPath =  '/tmp'; //'./uploads'
+var destinationPath =  '/tmp'; // ./uploads
 const storage = diskStorage({
   destination: destinationPath, // Répertoire de stockage des fichiers  /tmp 
   filename: (req, file, callback) => {
@@ -35,7 +35,7 @@ export class FileController {
 
       // Lire le contenu du fichier depuis l'emplacement de stockage
       const filePath1 = `/tmp/${uploadedFile.filename}`; //'./uploads/'
-      var data = fs.readFileSync(filePath1);
+      var data = fs.readFileSync(filePath1);   
 
       // , async (err, data) => {
       //   if (err) {
@@ -43,11 +43,7 @@ export class FileController {
       //     return 'Erreur lors de la lecture du fichier.';
       //   }
 
-       
-
-      // });
-
-       // Ajouter l'attribut buffer et sa valeur correspondante aux informations du fichier
+         // Ajouter l'attribut buffer et sa valeur correspondante aux informations du fichier
        uploadedFile.buffer = data;
        // console.log( uploadedFile.buffer );
        const fileBlob = new Blob([uploadedFile.buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
@@ -55,7 +51,7 @@ export class FileController {
        const formData = new FormData();
        // formData.append('file', fileBlob, file.originalname);
        formData.append('file', fileBlob, uploadedFile.originalname);
-       formData.append('query', 'Je souhaite avoir une colonne appelée "Montant HT" qui calcule le produit de la colonne "PU" et "Qte" au niveau de la feuil1');
+       formData.append('query', requestText);
        formData.append('username', 'testuser');
        formData.append('password', 'Ox50KH5cIsApiAMa5Dmz');
  
@@ -73,19 +69,39 @@ export class FileController {
       // Obtenez le contenu du fichier sous forme de tableau d'octets (buffer)
       const fileContent = responseTwo.data;
  
+      function removeChar(str){
+        const res = str.substr(5, str.length);
+        return res
+      }
       // Définissez le chemin de destination local pour le fichier
       let randomName = Array(32).fill(null).map(() => (Math.round(Math.random() * 16)).toString(16)).join('');
       randomName = `${randomName}${extname(response.data.url)}`;
-      const destinationPath = `/tmp/${randomName}`; //'uploads/'
+      const destinationPath2 = `/tmp/${randomName}`; //'uploads/'  removeChar(response.data.url)
        // Écrivez le contenu du fichier dans le dossier "uploads"
-       fs.writeFileSync(destinationPath, Buffer.from(fileContent));
+       fs.writeFileSync(destinationPath2, Buffer.from(fileContent));
  
        console.log("Fichier Excel transféré avec succès vers l'API de destination. Réponse de l'API de destination :", randomName);
        // return response.data;
+      //  return removeChar(response.data.url);
        return randomName;
+        
+      // });
 
+      function replaceFileExtension(filename) {
+        // Recherche la dernière occurrence du point (.) pour identifier l'extension.
+        const lastDotIndex = filename.lastIndexOf(".");
+        
+        if (lastDotIndex === -1) {
+          // Si aucun point n'est trouvé, retourne le nom de fichier tel quel.
+          return filename;
+        } else {
+          // Extrait la partie du nom de fichier avant le dernier point et ajoute ".xlsm".
+          const newFilename = filename.substring(0, lastDotIndex) + ".xlsm";
+          return newFilename;
+        }
+      }
 
-     
+      // return replaceFileExtension(uploadedFile.originalname);
     } catch (error) {
       console.error("Erreur lors de l'envoi du fichier Excel vers l'API de destination :", error);
       // console.log(file);
