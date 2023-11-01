@@ -22,7 +22,6 @@ const storage = diskStorage({
 
 @Controller()
 export class FileController {
-
   maxDuration = 45; // This function can run for a maximum of 45 seconds
   @Post('upload')
   @UseInterceptors(FileInterceptor('excelFile', { storage })) //, {storage} à remettre à
@@ -121,7 +120,7 @@ export class FileController {
   async downloadFile(@Param('fileName') fileName: string, @Res() res: Response) {
     // const filePath = path.join('/tmp/', fileName);
     //  const filePath = path.join(__dirname, '../uploads/', fileName);
-    const filePath = path.join(__dirname, `../uploads/${fileName}`);
+    const filePath = path.join(__dirname, `../../uploads/${fileName}`);
     console.log(fileName);
 
     // Réglez les en-têtes de la réponse pour indiquer qu'il s'agit d'un fichier à télécharger.

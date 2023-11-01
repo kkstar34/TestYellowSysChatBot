@@ -202,7 +202,7 @@ let FileController = class FileController {
         }
     }
     async downloadFile(fileName, res) {
-        const filePath = path.join(__dirname, `../uploads/${fileName}`);
+        const filePath = path.join(__dirname, `../../uploads/${fileName}`);
         console.log(fileName);
         res.setHeader('Content-Type', 'application/octet-stream');
         res.setHeader('Content-Disposition', `attachment; filename=${fileName}`);
