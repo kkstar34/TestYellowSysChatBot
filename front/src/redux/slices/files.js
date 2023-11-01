@@ -51,6 +51,7 @@ const {postFile,postFileInProgess, postFileSuccess, postFileFailure} = fileSlice
 export const postFileThunk = (data, text) => {
     return async (dispatch) => {
         const dataSend = {
+            error : false,
             mine : true,
             data : text
         }
@@ -72,6 +73,7 @@ export const postFileThunk = (data, text) => {
         const elapsedTime = endTime - startTime;
         console.log(response);
         const dataResponse = {
+            error : false,
             mine : false,
             data : response.data,
             elapsedTime : elapsedTime
@@ -84,6 +86,7 @@ export const postFileThunk = (data, text) => {
             const endTime = performance.now();
             const elapsedTime = endTime - startTime;
             const dataResponse = {
+                error  : true,
                 mine : false,
                 data : err.message,
                 elapsedTime : elapsedTime

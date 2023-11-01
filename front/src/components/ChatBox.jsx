@@ -49,7 +49,7 @@ function ChatBox() {
                     <img src="assets/images/user-avatar.png" alt="" />
                   </div>
                   <div className="response-text">
-                    <p>{elt.data } </p>
+                    <p>{elt.error ? "Désolé quelque chose s'est mal passée" : elt.data } </p>
                   </div>
                 </div>
               ) : (
