@@ -120,14 +120,15 @@ export class FileController {
   async downloadFile(@Param('fileName') fileName: string, @Res() res: Response) {
     // const filePath = path.join('/tmp/', fileName);
     //  const filePath = path.join(__dirname, '../uploads/', fileName);
-    const filePath = path.join(__dirname, `../../uploads/${fileName}`);
+    const filePath = path.join(__dirname, `../uploads/${fileName}`);
+    const newPath = filePath.replace("/dist/", "/");
     console.log(fileName);
 
     // Réglez les en-têtes de la réponse pour indiquer qu'il s'agit d'un fichier à télécharger.
     res.setHeader('Content-Type', 'application/octet-stream');
     res.setHeader('Content-Disposition', `attachment; filename=${fileName}`);
     // Envoyez le fichier en réponse.
-    res.sendFile(filePath);
+    res.sendFile(newPath);
   }
 
 }
