@@ -131,6 +131,7 @@ var _a, _b, _c, _d;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.FileController = void 0;
 const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
+const express_1 = __webpack_require__(/*! express */ "express");
 const multer_1 = __webpack_require__(/*! @nestjs/platform-express/multer */ "@nestjs/platform-express/multer");
 const multer_2 = __webpack_require__(/*! multer */ "multer");
 const path_1 = __webpack_require__(/*! path */ "path");
@@ -223,7 +224,7 @@ __decorate([
     __param(0, (0, common_1.Param)('fileName')),
     __param(1, (0, common_1.Res)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, typeof (_d = typeof Response !== "undefined" && Response) === "function" ? _d : Object]),
+    __metadata("design:paramtypes", [String, typeof (_d = typeof express_1.Response !== "undefined" && express_1.Response) === "function" ? _d : Object]),
     __metadata("design:returntype", Promise)
 ], FileController.prototype, "downloadFile", null);
 exports.FileController = FileController = __decorate([
@@ -270,6 +271,16 @@ module.exports = require("@nestjs/platform-express/multer");
 /***/ ((module) => {
 
 module.exports = require("axios");
+
+/***/ }),
+
+/***/ "express":
+/*!**************************!*\
+  !*** external "express" ***!
+  \**************************/
+/***/ ((module) => {
+
+module.exports = require("express");
 
 /***/ }),
 
