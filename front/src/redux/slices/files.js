@@ -4,7 +4,7 @@ import axios from "axios";
 
 
 
-var baseUrl = "https://back-with-nest.vercel.app";
+var baseUrl = "http://75.119.152.236:4000";
 // var baseUrl ="http://127.0.0.1:4000";
 
 const initialState = 

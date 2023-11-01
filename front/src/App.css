@@ -364,6 +364,10 @@ label i{
 }
 
 
+.danger{
+  color: red;
+}
+
 .chat-footer{
   position: fixed;
   width: calc(100% - 260px);
@@ -664,6 +668,9 @@ label i{
     font-size: 1rem;
   }
 
+  .danger {
+    color: red;
+  }
 
 
   .chat-footer{
