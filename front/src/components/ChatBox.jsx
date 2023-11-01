@@ -60,7 +60,7 @@ function ChatBox() {
 
                   <div className="response-text">
                     <p>
-                      {elt.error ? <p>Désolé quelque chose s'est mal passée !  : <span className="danger"> ${elt.data} </span></p>  : 
+                      {elt.error ? <p>Désolé quelque chose s'est mal passée !  : <span className="danger"> {elt.data} </span></p>  : 
                        <TypingEffect
                         text={`La génération du fichier Excel a été effectuée avec succès. 
                         Vous pouvez télécharger le fichier à partir du lien suivant : <span id=download-${i} class="download">Télécharger <i className="fa-solid fa-download"></i></span>`}
