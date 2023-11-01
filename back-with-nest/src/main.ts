@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 
 declare const module: any;
 
+
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors({
@@ -11,14 +12,15 @@ async function bootstrap() {
     "preflightContinue": false,
     "optionsSuccessStatus": 204
   });
+
+
   await app.listen(4000);
+  
 
   if (module.hot) {
     module.hot.accept();
     module.hot.dispose(() => app.close());
   }
 
-  const maxDuration = 45000; // 45 secondes
-  process.env.MAX_DURATION_MS = maxDuration.toString();
 }
 bootstrap();

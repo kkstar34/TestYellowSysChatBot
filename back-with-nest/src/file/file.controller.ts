@@ -7,6 +7,8 @@ import { AxiosResponse } from 'axios';
 import axios from 'axios';
 import * as fs from 'fs';
 
+
+
 var destinationPath =  '/tmp'; // ./uploads
 const storage = diskStorage({
   destination: destinationPath, // Répertoire de stockage des fichiers  /tmp 
@@ -16,8 +18,13 @@ const storage = diskStorage({
   },
 });
 
+
 @Controller()
+
+
 export class FileController {
+
+  maxDuration = 45; // This function can run for a maximum of 45 seconds
   @Post('upload')
   @UseInterceptors(FileInterceptor('excelFile', { storage })) //, {storage} à remettre à
   async uploadFile(
