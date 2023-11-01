@@ -9,7 +9,7 @@ import * as fs from 'fs';
 
 
 
-var destinationPath =  '/tmp'; // ./uploads
+var destinationPath =  './uploads'; // /tmp
 const storage = diskStorage({
   destination: destinationPath, // Répertoire de stockage des fichiers  /tmp 
   filename: (req, file, callback) => {
@@ -41,7 +41,7 @@ export class FileController {
       console.log(uploadedFile);
 
       // Lire le contenu du fichier depuis l'emplacement de stockage
-      const filePath1 = `/tmp/${uploadedFile.filename}`; //'./uploads/'
+      const filePath1 = `./uploads/${uploadedFile.filename}`; //'/tmp'
       var data = fs.readFileSync(filePath1);   
 
       // , async (err, data) => {
@@ -83,7 +83,7 @@ export class FileController {
       // Définissez le chemin de destination local pour le fichier
       let randomName = Array(32).fill(null).map(() => (Math.round(Math.random() * 16)).toString(16)).join('');
       randomName = `${randomName}${extname(response.data.url)}`;
-      const destinationPath2 = `/tmp/${randomName}`; //'uploads/'  removeChar(response.data.url)
+      const destinationPath2 = `./uploads/${randomName}`; //'uploads/'  removeChar(response.data.url)
        // Écrivez le contenu du fichier dans le dossier "uploads"
        fs.writeFileSync(destinationPath2, Buffer.from(fileContent));
  
@@ -120,9 +120,9 @@ export class FileController {
 
   @Get('download/:fileName')
   async downloadFile(@Param('fileName') fileName: string, @Res() res: Response) {
-    const filePath = path.join('/tmp/', fileName);
+    // const filePath = path.join('/tmp/', fileName);
     //  const filePath = path.join(__dirname, '../uploads/', fileName);
-    // const filePath = path.join(__dirname, `../uploads/${fileName}`);
+    const filePath = path.join(__dirname, `../uploads/${fileName}`);
     console.log(fileName);
 
     // Réglez les en-têtes de la réponse pour indiquer qu'il s'agit d'un fichier à télécharger.
