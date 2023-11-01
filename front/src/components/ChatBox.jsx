@@ -49,7 +49,7 @@ function ChatBox() {
                     <img src="assets/images/user-avatar.png" alt="" />
                   </div>
                   <div className="response-text">
-                    <p>{elt.error ? "Désolé quelque chose s'est mal passée" : elt.data } </p>
+                    <p>{ elt.data } </p>
                   </div>
                 </div>
               ) : (
@@ -60,7 +60,8 @@ function ChatBox() {
 
                   <div className="response-text">
                     <p>
-                      <TypingEffect
+                      {elt.error ? "Désolé quelque chose s'est mal passée" : 
+                       <TypingEffect
                         text={`La génération du fichier Excel a été effectuée avec succès. 
                         Vous pouvez télécharger le fichier à partir du lien suivant : <span id=download-${i} class="download">Télécharger <i className="fa-solid fa-download"></i></span>`}
                         speed={15}
@@ -68,7 +69,8 @@ function ChatBox() {
                         filename = {elt.data}
                         delay = {elt.elapsedTime}
                         id = {i}
-                      />
+                      />}
+                     
                     </p>
 
                   
